@@ -1,0 +1,77 @@
+# =============================================================================
+# Reference configuration used for the manuscript (IOT-D-26-03171).
+#
+# This file mirrors meta_ids.config.CONFIG / DATASETS exactly (checked by
+# tests/test_config.py). Running with `--config configs/default.yaml` gives the
+# same results as running without --config.
+#
+# To experiment, copy this file and edit the copy; any key you omit keeps its
+# reference value.
+# =============================================================================
+pipeline:
+  output_dir: outputs
+  test_size: 0.20              # 70 / 10 / 20 split (train / val / test)
+  val_size: 0.10
+  k_best: 30                   # SelectKBest(f_classif) features, fitted on TRAIN only
+  min_class_size_to_keep: 50   # balancing (a): drop classes below this size
+  target_min_class_size: 10000 # balancing (b): SMOTE smaller classes up to this
+  max_class_size: 50000        # balancing (c): undersample larger classes to this
+  max_rows: 200000             # stratified cap on raw rows (null = no cap)
+  min_class_presplit: 10       # needed for the stratified 70/10/20 split
+
+  cnn:
+    epochs: 40
+    batch_size: 512
+    lr: 0.001
+    patience: 5
+
+  meta:
+    episodes: 500              # meta-training episodes
+    meta_batch: 4              # tasks per meta-update
+    n_way: 5                   # capped at the number of available classes
+    k_shot: 20                 # support examples per class per episode
+    q_query: 15                # query examples per class per episode
+    inner_steps: 5             # inner-loop adaptation steps
+    inner_lr: 0.01
+    meta_lr: 0.001             # outer (Adam) learning rate
+    reptile_lr: 0.05           # Reptile inner SGD learning rate
+    reptile_eps: 0.5           # Reptile meta-interpolation (linearly annealed)
+    hidden: [128, 64]          # MLP hidden sizes
+    adapt_shot: 20             # support per class for global adaptation
+    adapt_steps: 50            # fine-tuning steps for global adaptation
+    zero_day: true             # hold out rare attack classes from meta-training
+    zero_day_n_classes: 2
+    eval_episodes: 200         # episodic few-shot / zero-day evaluation
+
+  xai:
+    n_background: 100          # background samples for SHAP / LIME
+    n_explain: 40              # instances explained per model / method
+    kernel_nsamples: 150       # SHAP KernelExplainer budget
+    lime_num_samples: 1000
+    top_k_list: [5, 10, 15]
+    stability_instances: 5
+    stability_perturbs: 3
+    stability_sigma: 0.05
+    infidelity_perturbs: 20
+    infidelity_sigma: 0.3
+
+  zeroday_detect:              # stage 6C: unified open-set detection
+    enabled: true
+    score_methods: [msp, entropy, margin]
+    target_fprs: [0.05, 0.10]
+    retrain_base_known_only: true
+    max_test_known: 20000      # cap on known negatives when scoring (null = all)
+
+datasets:
+  ASEADOS_SDN_IoT:
+    path: data/ASEADOS_SDN_IoT.csv
+    label_candidates: [label, class, attack_type, category]
+    drop: [id, flow_id]
+  RT-IoT2022:
+    path: data/RT-IoT2022.csv
+    label_candidates: [attack_type, label, class]
+    drop: ["no.", "no", "id", "unnamed: 0"]
+  UNSW-NB15:
+    path: data/UNSW-NB15.csv
+    label_candidates: [attack_cat]
+    drop: [id, label]

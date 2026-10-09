@@ -1,0 +1,23 @@
+# =============================================================================
+# Small configuration for a fast end-to-end check of the installation
+# (minutes on a laptop CPU). NOT the configuration used for the manuscript.
+# Equivalent to the benchmark's --quick flag.
+#
+#   python scripts/make_synthetic_dataset.py --out data/RT-IoT2022.csv
+#   python scripts/run_benchmark.py --config configs/smoke_test.yaml \
+#          --datasets RT-IoT2022 --output outputs_smoke
+# =============================================================================
+pipeline:
+  max_rows: 30000
+  cnn:
+    epochs: 8
+  meta:
+    episodes: 60
+    eval_episodes: 20
+    adapt_steps: 30
+  xai:
+    n_explain: 15
+    kernel_nsamples: 100
+    lime_num_samples: 500
+    stability_instances: 3
+    stability_perturbs: 2
