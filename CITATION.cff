@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the article below."
+title: "Explainable Meta-Learning for Few-Shot and Zero-Day Intrusion Detection in IoT Networks"
+type: software
+version: 1.0.0
+license: MIT
+repository-code: "https://github.com/<user>/explainable-meta-ids"
+authors:
+  - family-names: "<Family name>"
+    given-names: "<Given name>"
+    affiliation: "<Affiliation>"
+preferred-citation:
+  type: article
+  title: "Explainable Meta-Learning for Few-Shot and Zero-Day Intrusion Detection in IoT Networks"
+  authors:
+    - family-names: "<Family name>"
+      given-names: "<Given name>"
+  journal: "<Journal name>"          # manuscript IOT-D-26-03171 (under review)
+  year: 2026
+  status: submitted

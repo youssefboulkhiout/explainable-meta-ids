@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "meta-ids"
+version = "1.0.0"
+description = "Explainable meta-learning for few-shot and zero-day intrusion detection in IoT networks"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "<Author 1>" }, { name = "<Author 2>" }]   # as in the manuscript
+keywords = [
+    "intrusion detection", "IoT", "meta-learning", "few-shot learning",
+    "zero-day attacks", "open-set recognition", "explainable AI", "SHAP", "LIME",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Security",
+]
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scipy>=1.10",
+    "scikit-learn>=1.3",
+    "imbalanced-learn>=0.11",
+    "lightgbm>=4.0",
+    "torch>=2.0",
+    "shap>=0.44",
+    "lime>=0.2.0.1",
+    "matplotlib>=3.7",
+    "seaborn>=0.12",
+    "tqdm>=4.65",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4", "pyflakes>=3.0"]
+latency = ["psutil>=5.9"]          # RAM size in the E4 hardware report
+
+[project.scripts]
+meta-ids-benchmark = "meta_ids.pipeline:main"
+meta-ids-revision = "meta_ids.revision.cli:main"
+
+[project.urls]
+Repository = "https://github.com/<user>/explainable-meta-ids"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["slow: end-to-end runs on synthetic data (deselect with -m 'not slow')"]

@@ -1,0 +1,19 @@
+# Runtime dependencies (minimum versions).
+# The exact versions used to produce the published results should be recorded
+# in requirements-lock.txt (see docs/reproducibility.md).
+numpy>=1.24
+pandas>=2.0
+scipy>=1.10
+scikit-learn>=1.3
+imbalanced-learn>=0.11
+lightgbm>=4.0
+torch>=2.0
+shap>=0.44
+lime>=0.2.0.1
+matplotlib>=3.7
+seaborn>=0.12
+tqdm>=4.65
+pyyaml>=6.0
+
+# optional
+psutil>=5.9        # RAM size in the E4 hardware report
