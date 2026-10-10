@@ -1,0 +1,37 @@
+[
+  {
+    "dataset": "RT-IoT2022",
+    "zero_day": [
+      "ARP_poisioning",
+      "DDOS_Slowloris"
+    ],
+    "benign_class_used_in_zero_day_episodes": [],
+    "zero_day_episode_n_way": 2,
+    "n_raw_features_after_cleaning": 82,
+    "test_size": 23572
+  },
+  {
+    "dataset": "UNSW-NB15",
+    "zero_day": [
+      "DoS",
+      "Exploits"
+    ],
+    "benign_class_used_in_zero_day_episodes": [],
+    "zero_day_episode_n_way": 2,
+    "n_raw_features_after_cleaning": 44,
+    "test_size": 39968
+  },
+  {
+    "dataset": "ASEADOS_SDN_IoT",
+    "zero_day": [
+      "Bot",
+      "Prob"
+    ],
+    "benign_class_used_in_zero_day_episodes": [
+      "Benign"
+    ],
+    "zero_day_episode_n_way": 3,
+    "n_raw_features_after_cleaning": 65,
+    "test_size": 40000
+  }
+]

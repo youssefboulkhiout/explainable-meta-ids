@@ -1,0 +1,10 @@
+{
+  "platform": "Windows-10-10.0.19045-SP0",
+  "python": "3.10.20",
+  "processor": "Intel64 Family 6 Model 142 Stepping 12, GenuineIntel",
+  "cpu_count": 8,
+  "torch": "2.12.1+cpu",
+  "cuda_available": false,
+  "lightgbm": "4.6.0",
+  "ram_GB": 31.8
+}
